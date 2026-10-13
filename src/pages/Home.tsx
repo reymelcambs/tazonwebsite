@@ -90,7 +90,7 @@ export default function Home() {
             category="Product"
             details="View product"
             detailsHref="/products/stellas-ai"
-            ctaHref="/news"
+            ctaHref="/blog"
           />
           <ReleaseCard
             title="Stellas for Teachers"
@@ -99,7 +99,7 @@ export default function Home() {
             category="Education"
             details="Learn more"
             detailsHref="/products/stellas-ai#teachers"
-            ctaHref="/news"
+            ctaHref="/blog"
           />
           <ReleaseCard
             title="Tazon Labs: our model is in development"
@@ -223,9 +223,9 @@ export default function Home() {
                 Instagram
               </a>
             </div>
-            <Link to="/media" className="pill-btn pill-btn-secondary">
-              Listen now →
-            </Link>
+            <a href="https://www.youtube.com/@dailygrind-ug" target="_blank" rel="noopener noreferrer" className="pill-btn pill-btn-secondary">
+              Listen now ↗
+            </a>
           </div>
           <div className="fade-in space-y-4">
             {/* Latest episodes placeholder */}
@@ -247,12 +247,12 @@ export default function Home() {
       </Section>
 
       {/* ============================================
-          9. NEWS
+          9. LATEST FROM THE BLOG
           ============================================ */}
       <Section>
         <div className="flex items-center justify-between mb-10">
-          <h2 className="font-headline text-3xl sm:text-4xl">News</h2>
-          <Link to="/news" className="text-sm text-[var(--accent)] link-underline">All posts →</Link>
+          <h2 className="font-headline text-3xl sm:text-4xl">Latest from the blog</h2>
+          <Link to="/blog" className="text-sm text-[var(--accent)] link-underline">All posts →</Link>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {[
@@ -260,7 +260,7 @@ export default function Home() {
             { title: '[PLACEHOLDER] Our approach to responsible AI', date: '[PLACEHOLDER]', category: 'Research' },
             { title: '[PLACEHOLDER] Building for low-bandwidth environments', date: '[PLACEHOLDER]', category: 'Research' },
           ].map((post, i) => (
-            <Link to="/news" key={i} className="card block group">
+            <Link to="/blog" key={i} className="card block group">
               <div className="w-full h-32 rounded-xl bg-[var(--accent)]/5 mb-4 flex items-center justify-center">
                 <span className="font-mono-label">[PLACEHOLDER IMAGE]</span>
               </div>

@@ -8,10 +8,11 @@ const navItems = [
     href: '/research',
     links: [
       { label: 'Overview', href: '/research' },
-      { label: 'Education AI', href: '/research#education' },
-      { label: 'African Languages', href: '/research#languages' },
-      { label: 'Low-resource & Low-bandwidth AI', href: '/research#low-resource' },
-      { label: 'Responsible AI', href: '/research#responsible' },
+      { label: 'Alignment', href: '/research#alignment' },
+      { label: 'Economics', href: '/research#economics' },
+      { label: 'Interpretability', href: '/research#interpretability' },
+      { label: 'Societal Impacts', href: '/research#societal-impacts' },
+      { label: 'Frontier Red Team', href: '/research#frontier-red-team' },
       { label: 'Publications', href: '/research#publications' },
     ],
   },
@@ -37,16 +38,26 @@ const navItems = [
     ],
   },
   {
-    label: 'Learn',
-    href: '/news',
-    links: [
-      { label: 'Blog', href: '/news' },
-      { label: 'Guides', href: '/news#guides' },
-      { label: 'Daily Grind podcast', href: '/media' },
-      { label: 'Tazon Studio', href: '/studio' },
-    ],
+    label: 'Blog',
+    href: '/blog',
+    links: [],
   },
-  { label: 'News', href: '/news', links: [] },
+  {
+    label: 'Team',
+    href: '/team',
+    links: [],
+  },
+  {
+    label: 'Studio',
+    href: '/studio',
+    links: [],
+  },
+  {
+    label: 'Daily Grind',
+    href: 'EXTERNAL',
+    links: [],
+    external: true,
+  },
 ];
 
 export default function Header() {
@@ -123,7 +134,16 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-1" ref={dropdownRef} aria-label="Main navigation">
           {navItems.map((item) => (
             <div key={item.label} className="relative">
-              {item.links.length > 0 ? (
+              {item.external ? (
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); window.open('https://www.youtube.com/@dailygrind-ug', '_blank'); }}
+                  className="px-3 py-2 rounded-full text-sm font-medium transition-colors text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                  title="Opens in new tab"
+                >
+                  {item.label}
+                </a>
+              ) : item.links.length > 0 ? (
                 <button
                   onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                   className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium transition-colors ${
@@ -232,12 +252,23 @@ export default function Header() {
           <nav className="px-6 py-8" aria-label="Mobile navigation">
             {navItems.map((item) => (
               <div key={item.label} className="border-b border-[var(--border)]">
-                <Link
-                  to={item.href}
-                  className="block py-4 text-lg font-medium text-[var(--text-primary)]"
-                >
-                  {item.label}
-                </Link>
+                {item.external ? (
+                  <a
+                    href="https://www.youtube.com/@dailygrind-ug"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block py-4 text-lg font-medium text-[var(--text-primary)]"
+                  >
+                    {item.label} ↗
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className="block py-4 text-lg font-medium text-[var(--text-primary)]"
+                  >
+                    {item.label}
+                  </Link>
+                )}
                 {item.links.length > 0 && (
                   <div className="pb-3 pl-4">
                     {item.links.map((link) => (

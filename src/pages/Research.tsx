@@ -1,5 +1,33 @@
 import { Link } from 'react-router-dom';
-import { Section, FocusCard, NewsletterSignup, AfricanPatternSVG } from '../components/Shared';
+import { Section, AfricanPatternSVG, NewsletterSignup } from '../components/Shared';
+
+const researchTeams = [
+  {
+    id: 'alignment',
+    title: 'Alignment',
+    description: 'The Alignment team works to understand the risks of AI models and develop ways to ensure that future ones remain helpful, honest, and harmless — especially in African contexts where AI systems may encounter languages, cultures, and use cases that were not part of their training data.',
+  },
+  {
+    id: 'economics',
+    title: 'Economics',
+    description: 'The Economics team studies how AI is reshaping the economy across Africa, including work, productivity, and economic opportunity. We focus on ensuring AI benefits are shared broadly and do not deepen existing inequalities.',
+  },
+  {
+    id: 'frontier-red-team',
+    title: 'Frontier Red Team',
+    description: 'The Frontier Red Team analyzes the implications of frontier AI models for cybersecurity, biosecurity, and autonomous systems — with particular attention to risks that may affect African nations and communities disproportionately.',
+  },
+  {
+    id: 'interpretability',
+    title: 'Interpretability',
+    description: 'The mission of the Interpretability team is to understand how large language models work internally, as a foundation for AI safety and positive outcomes. We develop techniques to make AI decision-making transparent and accountable.',
+  },
+  {
+    id: 'societal-impacts',
+    title: 'Societal Impacts',
+    description: 'Societal Impacts is a technical research team that explores how AI is used in the real world across Africa. We study deployment patterns, unintended consequences, and opportunities for positive social change.',
+  },
+];
 
 export default function Research() {
   return (
@@ -11,44 +39,47 @@ export default function Research() {
           <div className="max-w-3xl fade-in">
             <p className="font-mono-label mb-4">Research</p>
             <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
-              AI research built in Africa, for the world.
+              Research.
             </h1>
-            <p className="font-serif-body text-lg text-[var(--text-secondary)] leading-relaxed">
-              Our research focuses on building AI systems that work for African contexts — languages, education, low-resource environments, and responsible deployment. We believe the best AI for Africa must be built in Africa.
+            <p className="font-serif-body text-lg sm:text-xl text-[var(--text-secondary)] leading-relaxed">
+              Our research teams investigate the safety, inner workings, and societal impacts of AI models — so that artificial intelligence has a positive impact as it becomes increasingly capable.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Focus areas */}
-      <Section id="education">
-        <h2 className="font-headline text-3xl sm:text-4xl mb-3">Focus areas</h2>
+      {/* Research teams overview */}
+      <Section>
+        <h2 className="font-headline text-3xl sm:text-4xl mb-3">Research teams</h2>
         <p className="font-serif-body text-[var(--text-secondary)] mb-10 max-w-2xl">
-          Our research is organized around four core areas, each addressing a critical gap in AI for the continent.
+          Our work is organized into five core research teams, each addressing a critical dimension of safe and beneficial AI.
         </p>
-        <div className="grid sm:grid-cols-2 gap-6">
-          <FocusCard
-            title="Education AI"
-            description="How can AI improve learning outcomes for students in Uganda and across East Africa? We build tools like Stellas AI and research effective pedagogical approaches for AI-assisted learning."
-            href="/products/stellas-ai"
-          />
-          <FocusCard
-            title="African Languages"
-            description="Most AI systems do not understand African languages well. We are working on models and datasets for Luganda, Swahili, and other languages spoken across the continent."
-            href="#"
-          />
-          <FocusCard
-            title="Low-resource & Low-bandwidth AI"
-            description="Not everyone has fast internet or powerful devices. We design AI systems that work well with limited data, compute, and connectivity — the reality for most of Africa."
-            href="#"
-          />
-          <FocusCard
-            title="Responsible AI"
-            description="We research how to build AI safely and transparently, with the communities we serve involved in the process from the start."
-            href="#"
-          />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {researchTeams.map((team) => (
+            <a
+              key={team.id}
+              href={`#${team.id}`}
+              className="card block group"
+            >
+              <h3 className="font-headline text-lg mb-2 group-hover:text-[var(--accent)] transition-colors">{team.title}</h3>
+              <p className="font-serif-body text-sm text-[var(--text-secondary)] line-clamp-3">{team.description}</p>
+            </a>
+          ))}
         </div>
       </Section>
+
+      {/* Detailed team sections */}
+      {researchTeams.map((team, i) => (
+        <Section key={team.id} id={team.id} className={i % 2 === 1 ? '!bg-[var(--bg-card)]' : ''}>
+          <div className="max-w-3xl">
+            <p className="font-mono-label mb-3">Research Team</p>
+            <h2 className="font-headline text-3xl sm:text-4xl mb-6">{team.title}</h2>
+            <p className="font-serif-body text-lg text-[var(--text-secondary)] leading-relaxed">
+              {team.description}
+            </p>
+          </div>
+        </Section>
+      ))}
 
       {/* Tazon Labs */}
       <Section id="labs" className="!bg-[var(--bg-card)]">

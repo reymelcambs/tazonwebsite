@@ -25,9 +25,9 @@ const footerColumns = [
   {
     title: 'Resources',
     links: [
-      { label: 'Blog', href: '/news' },
-      { label: 'Daily Grind', href: '/media' },
-      { label: 'Newsletter', href: '/#newsletter' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Daily Grind', href: 'https://www.youtube.com/@dailygrind-ug', external: true },
+      { label: 'Newsletter', href: '/' },
       { label: 'Press kit', href: '/contact' },
     ],
   },
@@ -38,7 +38,6 @@ const footerColumns = [
       { label: 'Team', href: '/team' },
       { label: 'Careers', href: '/careers' },
       { label: 'Research', href: '/research' },
-      { label: 'News', href: '/news' },
       { label: 'Commitments', href: '/commitments' },
       { label: 'Contact', href: '/contact' },
       { label: 'Privacy', href: '/privacy' },

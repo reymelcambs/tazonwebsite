@@ -6,10 +6,9 @@ import Home from './pages/Home';
 import Research from './pages/Research';
 import StellasAI from './pages/StellasAI';
 import Commitments from './pages/Commitments';
-import News from './pages/News';
+import Blog from './pages/Blog';
 import Team from './pages/Team';
 import Studio from './pages/Studio';
-import Media from './pages/Media';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
@@ -52,11 +51,9 @@ export default function App() {
           <Route path="/products/stellas-ai" element={<StellasAI />} />
           <Route path="/commitments" element={<Commitments />} />
           <Route path="/commitments/*" element={<Commitments />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news/*" element={<News />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/team" element={<Team />} />
           <Route path="/studio" element={<Studio />} />
-          <Route path="/media" element={<Media />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<About />} />

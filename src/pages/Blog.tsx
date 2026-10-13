@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Section, NewsletterSignup } from '../components/Shared';
 
-const categories = ['All', 'Announcements', 'Research', 'Product', 'Education', 'Company', 'Podcast'];
+const categories = ['All', 'Announcements', 'Research', 'Product', 'Education', 'Company'];
 
 const placeholderPosts = [
   {
@@ -29,9 +29,25 @@ const placeholderPosts = [
     author: 'Tazon Team',
     readTime: '4 min read',
   },
+  {
+    title: '[PLACEHOLDER] Stellas for Teachers: tools for educators',
+    date: '[PLACEHOLDER]',
+    category: 'Product',
+    excerpt: 'Introducing the Teachers side of Stellas AI — tools to track student progress and create custom assessments.',
+    author: 'Tazon Team',
+    readTime: '3 min read',
+  },
+  {
+    title: '[PLACEHOLDER] Why we are building AI in Uganda',
+    date: '[PLACEHOLDER]',
+    category: 'Company',
+    excerpt: 'Our mission, our approach, and why we believe the best AI for Africa must be built in Africa.',
+    author: 'Kato Sadat',
+    readTime: '6 min read',
+  },
 ];
 
-export default function News() {
+export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -46,12 +62,12 @@ export default function News() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl fade-in">
-          <p className="font-mono-label mb-4">News</p>
+          <p className="font-mono-label mb-4">Blog</p>
           <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
-            Updates from Tazon.
+            The Tazon Blog.
           </h1>
           <p className="font-serif-body text-lg text-[var(--text-secondary)] leading-relaxed">
-            Research updates, product launches, and stories from our work building AI in Africa.
+            Thoughts, updates, and stories from our work building AI in Africa. Research notes, product launches, and reflections on what we are learning.
           </p>
         </div>
       </section>
@@ -65,7 +81,7 @@ export default function News() {
               <h2 className="font-headline text-2xl sm:text-3xl mb-4">{placeholderPosts[0].title}</h2>
               <p className="font-serif-body text-[var(--text-secondary)] mb-6">{placeholderPosts[0].excerpt}</p>
               <p className="font-mono-label mb-4">{placeholderPosts[0].author} · {placeholderPosts[0].readTime}</p>
-              <Link to="#" className="pill-btn">Read post →</Link>
+              <button className="pill-btn">Read post →</button>
             </div>
             <div className="min-h-[200px] rounded-2xl bg-[var(--accent)]/5 flex items-center justify-center">
               <p className="font-mono-label">[PLACEHOLDER IMAGE]</p>
@@ -105,10 +121,9 @@ export default function News() {
         {/* Post list */}
         <div className="space-y-0">
           {filteredPosts.map((post, i) => (
-            <Link
-              to="#"
+            <button
               key={i}
-              className="flex flex-col sm:flex-row sm:items-center justify-between py-6 border-b border-[var(--border)] group hover:pl-2 transition-all duration-200"
+              className="w-full text-left flex flex-col sm:flex-row sm:items-center justify-between py-6 border-b border-[var(--border)] group hover:pl-2 transition-all duration-200"
             >
               <div className="flex-1">
                 <h3 className="font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors mb-1">
@@ -120,7 +135,7 @@ export default function News() {
                 <p className="font-mono-label">{post.date}</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">{post.category}</p>
               </div>
-            </Link>
+            </button>
           ))}
           {filteredPosts.length === 0 && (
             <div className="text-center py-16">
