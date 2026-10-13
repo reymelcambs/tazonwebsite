@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -15,9 +15,9 @@ import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 
-export default function App() {
+function FadeObserver() {
+  const location = useLocation();
   useEffect(() => {
-    // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,14 +28,21 @@ export default function App() {
       },
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
+    // Small delay to let new page content render
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.fade-in:not(.visible)').forEach((el) => observer.observe(el));
+    }, 50);
+    return () => { clearTimeout(timer); observer.disconnect(); };
+  }, [location.pathname]);
+  return null;
+}
 
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+export default function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
+      <FadeObserver />
       <a href="#main-content" className="skip-link">Skip to content</a>
       <Header />
       <main id="main-content">
@@ -59,6 +66,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
