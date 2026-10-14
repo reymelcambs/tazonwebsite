@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Research from './pages/Research';
 import StellasAI from './pages/StellasAI';
+import StellasPaper from './pages/StellasPaper';
 import Commitments from './pages/Commitments';
 import Blog from './pages/Blog';
 import Team from './pages/Team';
@@ -48,6 +49,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/research" element={<Research />} />
+          <Route path="/research/stellas-ai-paper" element={<StellasPaper />} />
           <Route path="/products/stellas-ai" element={<StellasAI />} />
           <Route path="/commitments" element={<Commitments />} />
           <Route path="/commitments/*" element={<Commitments />} />

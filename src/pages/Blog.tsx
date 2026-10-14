@@ -6,6 +6,16 @@ const categories = ['All', 'Announcements', 'Research', 'Product', 'Education', 
 
 const placeholderPosts = [
   {
+    title: 'Designing a Locally Grounded AI Learning Companion for Uganda\'s Secondary Education',
+    date: '13 October 2026',
+    category: 'Research',
+    excerpt: 'A development-oriented research paper on curriculum alignment, formative assessment, and responsible artificial intelligence for Ugandan O-Level and A-Level learners.',
+    author: 'Stellas AI R&D Team',
+    readTime: '25 min read',
+    link: '/research/stellas-ai-paper',
+    featured: true,
+  },
+  {
     title: '[PLACEHOLDER] Introducing Stellas AI',
     date: '[PLACEHOLDER]',
     category: 'Announcements',
@@ -74,20 +84,27 @@ export default function Blog() {
 
       {/* Featured post */}
       <Section>
-        <div className="card !p-8 sm:!p-12 fade-in">
+        <Link to="/research/stellas-ai-paper" className="card !p-8 sm:!p-12 fade-in block group">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <p className="font-mono-label mb-3">{placeholderPosts[0].date} · {placeholderPosts[0].category}</p>
-              <h2 className="font-headline text-2xl sm:text-3xl mb-4">{placeholderPosts[0].title}</h2>
+              <h2 className="font-headline text-2xl sm:text-3xl mb-4 group-hover:text-[var(--accent)] transition-colors">{placeholderPosts[0].title}</h2>
               <p className="font-serif-body text-[var(--text-secondary)] mb-6">{placeholderPosts[0].excerpt}</p>
               <p className="font-mono-label mb-4">{placeholderPosts[0].author} · {placeholderPosts[0].readTime}</p>
-              <button className="pill-btn">Read post →</button>
+              <span className="inline-flex items-center gap-2 text-sm text-[var(--accent)] font-medium group-hover:gap-3 transition-all">
+                Read full paper <span aria-hidden="true">→</span>
+              </span>
             </div>
-            <div className="min-h-[200px] rounded-2xl bg-[var(--accent)]/5 flex items-center justify-center">
-              <p className="font-mono-label">[PLACEHOLDER IMAGE]</p>
+            <div className="min-h-[200px] rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent)]/5 flex items-center justify-center">
+              <div className="text-center">
+                <svg className="w-16 h-16 mx-auto mb-3 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+                <p className="font-mono-label text-xs">Research Paper</p>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       </Section>
 
       {/* Filters + Search */}

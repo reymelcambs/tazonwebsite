@@ -144,6 +144,53 @@ export default function StellasAI() {
         </div>
       </Section>
 
+      {/* Research & Evidence */}
+      <Section>
+        <div className="fade-in">
+          <p className="font-mono-label mb-3">Research & Evidence</p>
+          <h2 className="font-headline text-3xl sm:text-4xl mb-6">
+            Grounded in research, honest about what we know.
+          </h2>
+          <div className="grid lg:grid-cols-5 gap-8 items-start">
+            <div className="lg:col-span-3 font-serif-body text-[var(--text-secondary)] leading-relaxed space-y-4">
+              <p>
+                Stellas AI is being developed as a curriculum-grounded learning companion for Uganda's O-Level and A-Level students. Our design is informed by UNESCO guidance on human-centred AI in education, Uganda's transition to competency-based learning, and the realities of classrooms where student-teacher ratios can reach 31:1 nationally.
+              </p>
+              <p>
+                We are transparent about what Stellas is and is not. It is a developing tool — not a replacement for teachers, and not yet proven to improve exam grades. Our research paper describes the rationale, design principles, safeguards, and a three-stage evaluation framework that we are working toward.
+              </p>
+              <p className="text-sm text-[var(--text-muted)]">
+                We believe educational AI should be judged by whether it supports learning and learner agency — not by conversational fluency alone.
+              </p>
+            </div>
+            <div className="lg:col-span-2">
+              <Link to="/research/stellas-ai-paper" className="card block group !bg-[var(--bg-card)]">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-7 h-7 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-mono-label mb-1">Research Paper · October 2026</p>
+                    <p className="font-medium text-sm">Working Draft</p>
+                  </div>
+                </div>
+                <h3 className="font-headline text-lg mb-2 group-hover:text-[var(--accent)] transition-colors">
+                  Designing a Locally Grounded AI Learning Companion for Uganda's Secondary Education
+                </h3>
+                <p className="font-serif-body text-sm text-[var(--text-secondary)] mb-4">
+                  Curriculum alignment, formative assessment, and responsible AI — our development-oriented research paper.
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm text-[var(--accent)] font-medium group-hover:gap-3 transition-all">
+                  Read the paper <span aria-hidden="true">→</span>
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* FAQ */}
       <Section className="!bg-[var(--bg-card)]">
         <h2 className="font-headline text-3xl sm:text-4xl mb-10">Frequently asked questions</h2>
