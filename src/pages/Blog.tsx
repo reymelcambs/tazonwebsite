@@ -1,71 +1,23 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Section, NewsletterSignup } from '../components/Shared';
+import { loadBlogPosts } from '../lib/content';
 
 const categories = ['All', 'Announcements', 'Research', 'Product', 'Education', 'Company'];
 
-const placeholderPosts = [
-  {
-    title: 'Designing a Locally Grounded AI Learning Companion for Uganda\'s Secondary Education',
-    date: '13 October 2026',
-    category: 'Research',
-    excerpt: 'A development-oriented research paper on curriculum alignment, formative assessment, and responsible artificial intelligence for Ugandan O-Level and A-Level learners.',
-    author: 'Stellas AI R&D Team',
-    readTime: '25 min read',
-    link: '/research/stellas-ai-paper',
-    featured: true,
-  },
-  {
-    title: '[PLACEHOLDER] Introducing Stellas AI',
-    date: '[PLACEHOLDER]',
-    category: 'Announcements',
-    excerpt: 'We are launching Stellas AI, an AI tutor and exam-prep platform for Ugandan students preparing for their UACE exams.',
-    author: 'Tazon Team',
-    readTime: '3 min read',
-  },
-  {
-    title: '[PLACEHOLDER] Our approach to responsible AI in education',
-    date: '[PLACEHOLDER]',
-    category: 'Research',
-    excerpt: 'How we think about building AI tools for students — safety, privacy, and impact.',
-    author: 'Tazon Team',
-    readTime: '5 min read',
-  },
-  {
-    title: '[PLACEHOLDER] Building for low-bandwidth environments',
-    date: '[PLACEHOLDER]',
-    category: 'Research',
-    excerpt: 'Why we design our AI systems to work well even with limited internet connectivity.',
-    author: 'Tazon Team',
-    readTime: '4 min read',
-  },
-  {
-    title: '[PLACEHOLDER] Stellas for Teachers: tools for educators',
-    date: '[PLACEHOLDER]',
-    category: 'Product',
-    excerpt: 'Introducing the Teachers side of Stellas AI — tools to track student progress and create custom assessments.',
-    author: 'Tazon Team',
-    readTime: '3 min read',
-  },
-  {
-    title: '[PLACEHOLDER] Why we are building AI in Uganda',
-    date: '[PLACEHOLDER]',
-    category: 'Company',
-    excerpt: 'Our mission, our approach, and why we believe the best AI for Africa must be built in Africa.',
-    author: 'Kato Sadat',
-    readTime: '6 min read',
-  },
-];
-
 export default function Blog() {
+  const posts = useMemo(() => loadBlogPosts(), []);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredPosts = placeholderPosts.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  const featuredPost = posts.find(p => p.featured);
+  const regularPosts = filteredPosts.filter(p => !p.featured || activeCategory !== 'All' || searchQuery);
 
   return (
     <div className="pt-28 pb-16">
@@ -83,29 +35,31 @@ export default function Blog() {
       </section>
 
       {/* Featured post */}
-      <Section>
-        <Link to="/research/stellas-ai-paper" className="card !p-8 sm:!p-12 fade-in block group">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <p className="font-mono-label mb-3">{placeholderPosts[0].date} · {placeholderPosts[0].category}</p>
-              <h2 className="font-headline text-2xl sm:text-3xl mb-4 group-hover:text-[var(--accent)] transition-colors">{placeholderPosts[0].title}</h2>
-              <p className="font-serif-body text-[var(--text-secondary)] mb-6">{placeholderPosts[0].excerpt}</p>
-              <p className="font-mono-label mb-4">{placeholderPosts[0].author} · {placeholderPosts[0].readTime}</p>
-              <span className="inline-flex items-center gap-2 text-sm text-[var(--accent)] font-medium group-hover:gap-3 transition-all">
-                Read full paper <span aria-hidden="true">→</span>
-              </span>
-            </div>
-            <div className="min-h-[200px] rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent)]/5 flex items-center justify-center">
-              <div className="text-center">
-                <svg className="w-16 h-16 mx-auto mb-3 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                </svg>
-                <p className="font-mono-label text-xs">Research Paper</p>
+      {featuredPost && (
+        <Section>
+          <Link to={`/blog/${featuredPost.slug}`} className="card !p-8 sm:!p-12 fade-in block group">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="font-mono-label mb-3">{featuredPost.date} · {featuredPost.category}</p>
+                <h2 className="font-headline text-2xl sm:text-3xl mb-4 group-hover:text-[var(--accent)] transition-colors">{featuredPost.title}</h2>
+                <p className="font-serif-body text-[var(--text-secondary)] mb-6">{featuredPost.excerpt}</p>
+                <p className="font-mono-label mb-4">{featuredPost.author} · {featuredPost.readTime}</p>
+                <span className="inline-flex items-center gap-2 text-sm text-[var(--accent)] font-medium group-hover:gap-3 transition-all">
+                  Read post <span aria-hidden="true">→</span>
+                </span>
+              </div>
+              <div className="min-h-[200px] rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent)]/5 flex items-center justify-center">
+                <div className="text-center">
+                  <svg className="w-16 h-16 mx-auto mb-3 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                  </svg>
+                  <p className="font-mono-label text-xs">Featured Post</p>
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
-      </Section>
+          </Link>
+        </Section>
+      )}
 
       {/* Filters + Search */}
       <Section>
@@ -137,10 +91,11 @@ export default function Blog() {
 
         {/* Post list */}
         <div className="space-y-0">
-          {filteredPosts.map((post, i) => (
-            <button
-              key={i}
-              className="w-full text-left flex flex-col sm:flex-row sm:items-center justify-between py-6 border-b border-[var(--border)] group hover:pl-2 transition-all duration-200"
+          {regularPosts.map((post) => (
+            <Link
+              to={`/blog/${post.slug}`}
+              key={post.slug}
+              className="flex flex-col sm:flex-row sm:items-center justify-between py-6 border-b border-[var(--border)] group hover:pl-2 transition-all duration-200"
             >
               <div className="flex-1">
                 <h3 className="font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors mb-1">
@@ -152,22 +107,13 @@ export default function Blog() {
                 <p className="font-mono-label">{post.date}</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">{post.category}</p>
               </div>
-            </button>
+            </Link>
           ))}
-          {filteredPosts.length === 0 && (
+          {regularPosts.length === 0 && (
             <div className="text-center py-16">
               <p className="font-serif-body text-[var(--text-muted)]">No posts found.</p>
             </div>
           )}
-        </div>
-
-        {/* Pagination placeholder */}
-        <div className="flex justify-center mt-12">
-          <div className="flex gap-2">
-            <button className="px-4 py-2 rounded-full text-sm bg-[var(--text-primary)] text-[var(--bg-page)]">1</button>
-            <button className="px-4 py-2 rounded-full text-sm border border-[var(--border)] text-[var(--text-secondary)]">2</button>
-            <button className="px-4 py-2 rounded-full text-sm border border-[var(--border)] text-[var(--text-secondary)]">3</button>
-          </div>
         </div>
       </Section>
 

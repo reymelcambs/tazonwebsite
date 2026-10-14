@@ -8,6 +8,7 @@ import StellasAI from './pages/StellasAI';
 import StellasPaper from './pages/StellasPaper';
 import Commitments from './pages/Commitments';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import Team from './pages/Team';
 import Studio from './pages/Studio';
 import About from './pages/About';
@@ -49,11 +50,12 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/research" element={<Research />} />
-          <Route path="/research/stellas-ai-paper" element={<StellasPaper />} />
+          <Route path="/research/:slug" element={<StellasPaper />} />
           <Route path="/products/stellas-ai" element={<StellasAI />} />
           <Route path="/commitments" element={<Commitments />} />
           <Route path="/commitments/*" element={<Commitments />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/team" element={<Team />} />
           <Route path="/studio" element={<Studio />} />
           <Route path="/about" element={<About />} />
